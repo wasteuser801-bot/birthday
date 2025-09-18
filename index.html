@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday!</title>
+  <style>
+    /* ---------- Reset & base ---------- */
+    :root{
+      --bg1: #86dbf5; /* soft pink */
+      --bg2: #fff7e6; /* soft cream */
+      --accent-1: #ff6b9f; /* frosting */
+      --accent-2: #ffd166; /* candle */
+      --cake-1: #fcd5e5;
+      --cake-2: #f661cc;
+      --text: #3b2d4b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+
+    /* ---------- Full-screen party background ---------- */
+    body{
+      background: radial-gradient(circle at 10% 20%, rgba(172, 229, 237, 0.6) 0%, transparent 20%),
+                  linear-gradient(135deg,var(--bg1),var(--bg2));
+      overflow:hidden;
+      color:var(--text);
+      display:flex;align-items:center;justify-content:center;padding:24px;
+    }
+
+    /* party pattern subtle */
+    .pattern {
+      position:fixed;inset:0;pointer-events:none;opacity:0.25;background-image:
+        radial-gradient(circle at 10px 10px, rgba(255,255,255,0.12) 0 2px, transparent 3px),
+        radial-gradient(circle at 40px 60px, rgba(0,0,0,0.02) 0 2px, transparent 3px);
+      background-size:60px 60px, 120px 120px;mix-blend-mode:soft-light;
+    }
+
+    /* ---------- Main container with flex layout ---------- */
+    .main-container {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      max-width: 1200px;
+      height: 100vh;
+      align-items: center;
+    }
+
+    /* ---------- Center card (container) ---------- */
+    .card {
+      flex: 1;
+      max-width: 980px;
+
+      /* Translucent frosted look */
+      background: rgba(107, 232, 248, 0.25);       /* lighter alpha */
+      backdrop-filter: blur(16px) saturate(180%);  /* stronger blur + saturation */
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+
+      border-radius: 24px;
+
+      /* A subtle border to mimic glass edges */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+
+      /* Depth */
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+
+      padding: 28px;
+      display: flex;
+      gap: 24px;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* ---------- Image container ---------- */
+    .image-container {
+      width: 300px;
+      height: 80vh;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 85%;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      text-align: center;
+      color: rgba(4, 80, 186, 0.9);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      font-family: 'Baloo 2', Segoe UI, system-ui;
+      font-size: clamp(1.8rem, 3.8vw, 3rem);
+      margin: 0;
+    }
+
+    p.lead {
+      margin: 8px 0 18px;
+      font-size: 1.05rem;
+      color: rgba(0, 0, 0, 0.85); /* reads well on glass */
+    }
+
+    /* ---------- Cake (hero) ---------- */
+    .stage{width:100%;display:flex;align-items:center;justify-content:center}
+    .cake{
+      position:relative;width:min(560px,86vw);display:flex;flex-direction:column;align-items:center;padding-top:26px;
+    }
+
+   /* cake layers */
+.layer {
+  width: 86%;
+  border-radius: 30px;
+  padding: 22px 18px;
+
+  /* remove vertical spacing between layers */
+  margin: 0;                       /* <-- no outer margin */
+  position: relative;
+  box-shadow: 0 8px 20px rgba(61,40,78,0.08);
+}
+
+/* cream layers */
+.layer.cream {
+  background: linear-gradient(180deg, var(--cake-1), var(--cake-2));
+}
+
+/* frosted top layer */
+.layer.frost {
+  background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.8) 40%);
+  border: 4px solid rgba(255,255,255,0.6);
+}
+
+/* bottom/brown layer */
+.layer.base {
+  /* a rich chocolate-brown gradient */
+  background: linear-gradient(180deg, #8B4513 0%, #5C3317 100%);
+}
+
+/* drip icing effect */
+.drip {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  height: 28px;
+  top: -22px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, var(--accent-1), #ffd1e6);
+  filter: blur(.3px);
+  opacity: 0.98;
+}
+.drip:before,
+.drip:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+.drip:before { width: 36px; height: 36px; left: 18%; top: 12px; }
+.drip:after  { width: 24px; height: 24px; left: 66%; top: 8px; }
+
+/* candle row */
+.candles {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  top: -12px;
+}
+.candle {
+  width: 12px;
+  height: 44px;
+  border-radius: 4px;
+  background: var(--accent-2);
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 0 -4px 8px rgba(0,0,0,0.06);
+}
+.candle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100%;
+  width: 10px;
+  height: 12px;
+  background: linear-gradient(180deg, #fffdd0, #fff3b0);
+  border-radius: 2px;
+}
+
+
+    /* flame */
+    .flame{position:absolute;left:50%;transform:translateX(-50%);bottom:120%;width:12px;height:18px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 30% 30%,#ffd76b 0 20%,#ff8b4d 40%, transparent 70%);filter:drop-shadow(0 6px 8px rgba(255,140,60,0.18))}
+    /* flicker animation */
+    @keyframes flicker {
+      0%{transform:translateX(-50%) scale(1)}
+      40%{transform:translateX(-50%) scale(1.08)}
+      70%{transform:translateX(-52%) scale(0.95)}
+      100%{transform:translateX(-50%) scale(1)}
+    }
+    .flame{animation:flicker 1.2s infinite ease-in-out}
+
+    /* small glow */
+    .flame:before{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;width:40px;height:20px;border-radius:50%;background:radial-gradient(ellipse at center, rgba(255,180,90,0.18), transparent 60%)}
+
+    /* ---------- Balloons ---------- */
+    .balloon{position:absolute;width:64px;height:84px;border-radius:60% 60% 50% 50%;display:flex;align-items:flex-end;justify-content:center}
+    .balloon::after{content:"";width:2px;height:40px;background:rgba(0,0,0,0.08);position:absolute;bottom:-36px;border-radius:2px}
+
+    /* different colors */
+    .b1{background:linear-gradient(180deg,#ff9fc0,#ff6b9f);left:6%;bottom:10%}
+    .b2{background:linear-gradient(180deg,#9ad3ff,#6aaef7);left:18%;bottom:6%}
+    .b3{background:linear-gradient(180deg,#ffe299,#ffd166);right:18%;bottom:8%}
+    .b4{background:linear-gradient(180deg,#e8c8ff,#c09bff);right:6%;bottom:12%}
+
+    /* float animations (different speeds/delays) */
+    @keyframes floatUp{from{transform:translateY(0) rotate(-6deg);opacity:1} to{transform:translateY(-380px) rotate(6deg);opacity:.14}}
+    .balloon{animation:floatUp linear infinite}
+    .b1{animation-duration:18s;animation-delay:0s}
+    .b2{animation-duration:14s;animation-delay:2s}
+    .b3{animation-duration:22s;animation-delay:1s}
+    .b4{animation-duration:16s;animation-delay:.6s}
+
+    /* ---------- Enhanced Button Micro-interactions ---------- */
+    .controls{display:flex;gap:12px;align-items:center}
+    
+    /* ---------- Buttons (static – no effects) ---------- */
+button,
+.mute,
+.special-button {
+  background: var(--accent-1);
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none;
+  transition: none;
+  position: static;
+  overflow: visible;
+}
+
+/* remove all pseudo-element effects */
+button::before,
+button::after,
+.mute::before,
+.special-button::before {
+  content: none !important;
+}
+
+/* hover / active / focus states completely static */
+button:hover,
+button:active,
+button:focus,
+.mute:hover,
+.mute:active,
+.mute:focus,
+.special-button:hover,
+.special-button:active,
+.special-button:focus {
+  background: var(--accent-1);
+  box-shadow: none;
+  outline: none;
+}
+
+    /* Glass Break Popup Modal */
+    .glass-break-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .glass-break-modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .glass-window {
+      position: relative;
+      width: 400px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+
+    .glass-break-modal.show .glass-window {
+      transform: scale(1);
+    }
+
+    .popup-image {
+      width: 90%;
+      height: 75%;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .popup-caption {
+      position: absolute;
+      bottom: 60px;
+      left: 20px;
+      right: 20px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 1rem;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      z-index: 5;
+    }
+
+    /* Heart effect */
+    .glass-hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .glass-hearts.show {
+      opacity: 1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: #ff6b9f;
+      transform-origin: center;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+
+    .heart-1 {
+      font-size: 32px;
+      top: 30%;
+      left: 60%;
+      animation: heartAppear 0.6s ease-out, heartFloat 2s ease-in-out infinite 0.6s;
+    }
+
+    .heart-2 {
+      font-size: 20px;
+      top: 20%;
+      left: 40%;
+      animation: heartAppear 0.6s ease-out 0.2s both, heartFloat 2.2s ease-in-out infinite 0.8s;
+    }
+
+    .heart-3 {
+      font-size: 28px;
+      top: 50%;
+      left: 70%;
+      animation: heartAppear 0.6s ease-out 0.4s both, heartFloat 1.8s ease-in-out infinite 1s;
+    }
+
+    .heart-4 {
+      font-size: 18px;
+      top: 40%;
+      left: 30%;
+      animation: heartAppear 0.6s ease-out 0.3s both, heartFloat 2.5s ease-in-out infinite 0.9s;
+    }
+
+    .heart-5 {
+      font-size: 26px;
+      top: 65%;
+      left: 50%;
+      animation: heartAppear 0.6s ease-out 0.5s both, heartFloat 2.1s ease-in-out infinite 1.1s;
+    }
+
+    @keyframes heartAppear {
+      0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.3) rotate(5deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes heartFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-8px) rotate(2deg);
+      }
+      50% {
+        transform: translateY(-4px) rotate(-1deg);
+      }
+      75% {
+        transform: translateY(-6px) rotate(1deg);
+      }
+    }
+
+    /* Glass shatter animation */
+    @keyframes glassShatter {
+      0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05) rotate(2deg);
+      }
+      100% {
+        transform: scale(0) rotate(5deg);
+        opacity: 0;
+      }
+    }
+
+    .glass-window.shatter {
+      animation: glassShatter 0.8s ease-in-out;
+    }
+
+    /* Close button */
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .close-modal:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    /* Impact point animation */
+    .impact-point {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+      transform: scale(0);
+      pointer-events: none;
+    }
+
+    @keyframes impact {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(2);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    .impact-point.animate {
+      animation: impact 0.6s ease-out;
+    }
+
+    /* Focus states for accessibility */
+    button:focus {
+      outline: 3px solid rgba(255, 107, 159, 0.5);
+      outline-offset: 2px;
+    }
+
+    .mute:focus {
+      outline: 3px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Button text - no micro-animation */
+    button span {
+      display: inline-block;
+    }
+
+    /* responsive */
+    @media (max-width:768px){
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        gap: 16px;
+      }
+      .image-container {
+        width: 100%;
+        height: 200px;
+        order: -1;
+      }
+      .cake{width:92%}
+      .balloon{width:48px;height:64px}
+      .candles{gap:8px}
+      
+      /* Reduce hover effects on mobile - no movement */
+      button:hover {
+        box-shadow: 0 8px 20px rgba(255,107,159,0.3);
+      }
+      
+      .special-button:hover {
+        box-shadow: 0 10px 26px rgba(255,107,159,0.35);
+      }
+    }
+
+    /* canvas for confetti overlay */
+    canvas.confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:40}
+
+    /* ---------- Login Page Styles ---------- */
+    .login-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #90c6f0 0%, #c8daed 50%, #e1effe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .login-container.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #4f8af7, #2985f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-subtitle {
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid rgba(79, 195, 247, 0.2);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      font-size: 1rem;
+      color: #333;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+    }
+
+    .login-input:focus {
+      border-color: #4fa3f7;
+      box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.1);
+    }
+
+    .login-input::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .login-button {
+      background: linear-gradient(135deg, #4fb1f7, #298cf6);
+      color: white;
+      border: none;
+      padding: 16px 24px;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 8px;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(79, 195, 247, 0.3);
+    }
+
+    .login-button:active {
+      transform: translateY(0);
+    }
+
+    .login-hint {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: rgba(79, 195, 247, 0.1);
+      border-radius: 12px;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 0.9rem;
+      border: 1px solid rgba(79, 195, 247, 0.2);
+    }
+
+    .cute-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+  </style>
+</head>
+<body>
+  <div class="pattern" aria-hidden></div>
+  <canvas class="confetti-canvas" id="confetti"></canvas>
+  <!-- Login Page -->
+  <div id="login-container" class="login-container">
+    <div class="login-card">
+      <div class="cute-icon">🎂❤️</div>
+      <h2 class="login-title">HAPPY BIRTHDAY LEENIE !!!</h2>
+      <p class="login-subtitle">Enter to celebrate! (One day in real WE'LL) 🤗</p>
+      
+      <form class="login-form" id="login-form">
+        <div class="input-group">
+          <input 
+            type="text" 
+            id="username" 
+            class="login-input" 
+            placeholder="Username"
+            
+          >
+        </div>
+        
+        <div class="input-group">
+          <input 
+            type="password" 
+            id="password" 
+            class="login-input" 
+            placeholder="Password"
+            
+          >
+        </div>
+        
+        <button type="submit" class="login-button">
+          🎉 Enter Virtual Celebration
+        </button>
+      </form>
+      
+      <div class="login-hint">
+        💡 Hint:<br>
+        Username: <strong>Leenie's____</strong><br>
+        Password: <strong>My most favv element from THE PDF</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container" id="main-container">
+
+    <main class="card" role="main" aria-label="Birthday greeting">
+      <div style="text-align:center;">
+        <h1 id="greeting">🎂🎉 Happy Birthday, Leenson! 😘🤗</h1>
+        <p class="lead">Wishing you a wonderful day and year ahead. <br>
+          Wishing you health, success and happiness. I'll always pray for this and FOR US.</p>
+      </div>
+
+      <section class="stage" aria-hidden>
+        <div class="cake" id="cake">
+          <!-- candles -->
+          <div class="candles" aria-hidden>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+          </div>
+
+          <!-- top cream layer with drip -->
+          <div class="layer frost" style="height:78px;
+       background:linear-gradient(180deg,#f8f5f6 0%, #f8d0e4 100%);
+       border:4px solid rgba(255,255,255,0.6)">
+    <div class="drip" aria-hidden></div>
+  </div>
+
+
+          <!-- cake layers -->
+          <div class="layer cream" style="height:84px;"> <!-- middle -->
+          </div>
+          <div class="layer" style="background:linear-gradient(180deg,#f5bc95,#cf5b03);height:72px"> <!-- base -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- floating balloons positioned in the page (decorative) -->
+      <div class="balloon b1" aria-hidden style="z-index:10"></div>
+      <div class="balloon b2" aria-hidden style="z-index:9"></div>
+      <div class="balloon b3" aria-hidden style="z-index:8"></div>
+      <div class="balloon b4" aria-hidden style="z-index:7"></div>
+
+      <div style="display:flex;gap:18px;align-items:center;justify-content:center;width:100%;margin-top:6px;">
+        <div class="controls">
+          <button id="boom"><span> 🎉 Confetti !!!!</span></button>
+          <button id="toggle-audio" class="mute"><span> HBD LEENIE ❤️</span></button>
+          <button id="special-action" class="special-button"><span>I LOVE YOU SO MUCH ❤️</span></button>
+        </div>
+      </div>
+
+      <audio id="jingle" loop preload="none">
+        <source src="happy-birthday-314197.mp3" type="audio/mpeg">
+        <!-- Add your audio file URL or place file beside index.html and reference it here -->
+      </audio>
+
+      <p style="opacity:.7;margin:8px 0 0;font-size:.9rem">PS: FROM YOUR AMMU WITH LOADS OF LOVE<br>
+      (you can't even imagine how much I love you Hun) <br>
+    Happiest 22nd B'day Hun !! Ummah 😘<br>
+    Real TIGHT HUG🤗</p>
+    </main>
+
+    <!-- Image container on the right -->
+    <div class="image-container">
+      <img src="IMG_2951.JPG" alt="Birthday photo">
+      <div class="image-caption">🎂 HUNNNN CUTUUUU 📸</div>
+    </div>
+  </div>
+
+  <!-- Glass Break Modal -->
+  <div id="glass-break-modal" class="glass-break-modal">
+    <div class="glass-window" id="glass-window">
+      <button class="close-modal" id="close-modal">×</button>
+      <img src="Snapchat-160980639.jpg" alt="Birthday celebration" class="popup-image" id="popup-image">
+      <div class="popup-caption"> Nice jawline 🤭💖 </div>
+      <div class="impact-point" id="impact-point"></div>
+      <div class="glass-hearts" id="glass-hearts">
+        <div class="heart heart-1">❤️</div>
+        <div class="heart heart-2">💖</div>
+        <div class="heart heart-3">💕</div>
+        <!-- <div class="heart heart-4">💗</div> -->
+        <div class="heart heart-5">❤️</div>
+      </div>
+    </div>
+  </div>
+
+ <script>
+  /* ---------- Login Functionality ---------- */
+  document.getElementById('login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Check credentials
+    if (username === "Leenie'sAmmu" && password === 'inf-6') {
+      // Hide login page
+      document.getElementById('login-container').classList.add('hidden');
+
+      // Show main content after animation
+        setTimeout(() => {
+          document.getElementById('main-container').classList.add('show');
+          
+          // Start confetti after main content is visible
+          setTimeout(() => {
+            const rect = document.getElementById('cake').getBoundingClientRect();
+            spawnBurst(rect.left + rect.width/2, rect.top + 40, 140);
+          }, 300);
+        }, 500);
+      } else {
+        // Show error (shake animation)
+        const loginCard = document.querySelector('.login-card');
+        loginCard.style.animation = 'shake 0.5s ease-in-out';
+        setTimeout(() => {
+          loginCard.style.animation = '';
+        }, 500);
+      }
+  });
+
+  /* Add shake animation for wrong credentials */
+  const shakeAnimation = `
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+  `;
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = shakeAnimation;
+  document.head.appendChild(styleSheet);
+
+  /* ---------- Simple confetti system using canvas ---------- */
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+
+  let W = (canvas.width = innerWidth);
+  let H = (canvas.height = innerHeight);
+
+  window.addEventListener('resize', () => {
+    W = canvas.width = innerWidth;
+    H = canvas.height = innerHeight;
+  });
+
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  class Particle {
+    constructor(x, y, dx, dy, size, color, tilt, ttl) {
+      this.x = x;
+      this.y = y;
+      this.dx = dx;
+      this.dy = dy;
+      this.size = size;
+      this.color = color;
+      this.tilt = tilt;
+      this.ttl = ttl;
+      this.age = 0;
+    }
+
+    update(dt) {
+      this.x += this.dx * dt;
+      this.y += this.dy * dt;
+      this.tilt += 0.02;
+      this.age += dt;
+    }
+
+    draw(ctx) {
+      ctx.save();
+      ctx.translate(this.x + Math.sin(this.tilt) * 6, this.y);
+      ctx.rotate(this.tilt * 0.02);
+      ctx.fillStyle = this.color;
+      ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+      ctx.restore();
+    }
+  }
+
+  let particles = [];
+
+  function spawnBurst(x, y, count = 80) {
+    const colors = ['#ff6b9f', '#ffd166', '#9ad3ff', '#e8c8ff', '#8df7b6'];
+    for (let i = 0; i < count; i++) {
+      const angle = rand(-Math.PI, 0);
+      const speed = rand(120, 420);
+      const dx = Math.cos(angle) * speed;
+      const dy = Math.sin(angle) * speed;
+      particles.push(
+        new Particle(
+          x,
+          y,
+          dx,
+          dy,
+          rand(6, 14),
+          colors[Math.floor(rand(0, colors.length))],
+          rand(0, 6),
+          rand(1.2, 2.8)
+        )
+      );
+    }
+  }
+
+  let last = performance.now();
+
+  function loop(now) {
+    const dt = (now - last) / 1000;
+    last = now;
+
+    ctx.clearRect(0, 0, W, H);
+
+    particles = particles.filter(p => p.age < p.ttl && p.y < H + 100);
+    for (const p of particles) {
+      p.update(dt);
+      p.draw(ctx);
+    }
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  // initial burst on load (center of cake)
+  window.addEventListener('load', () => {
+    const rect = document.getElementById('cake').getBoundingClientRect();
+    spawnBurst(rect.left + rect.width / 2, rect.top + 40, 140);
+  });
+
+  /* ---------- Ripple effect ---------- */
+  function addRippleEffect(button, event) {
+    const rect = button.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Note: ::after cannot be targeted in JS, needs CSS ripple setup.
+    button.style.setProperty('--ripple-x', x + 'px');
+    button.style.setProperty('--ripple-y', y + 'px');
+  }
+
+  // button to trigger more confetti
+  document.getElementById('boom').addEventListener('click', (e) => {
+    addRippleEffect(e.target, e);
+    spawnBurst(rand(200, W - 200), rand(120, H - 120), 120);
+  });
+
+
+
+    const audio  = document.getElementById('jingle');
+    const toggle = document.getElementById('toggle-audio');
+
+    toggle.addEventListener('click', (e) => {
+      addRippleEffect(e.target, e);
+      
+      if (audio.paused) {
+        audio.play();
+        toggle.querySelector('span').textContent = 'Pause music';
+        toggle.classList.remove('mute');
+      } else {
+        audio.pause();
+        toggle.querySelector('span').textContent = 'HBD LEENIE ❤️';
+        toggle.classList.add('mute');
+      }
+    });
+
+    /* ---------- Enhanced special button functionality with glass break ---------- */
+    document.getElementById('special-action').addEventListener('click', function(e) {
+      addRippleEffect(this, e);
+      
+      // Trigger a special confetti burst from the button
+      const rect = this.getBoundingClientRect();
+      spawnBurst(rect.left + rect.width/2, rect.top + rect.height/2, 100);
+      
+      // Add a fun message without position change
+      const originalText = this.querySelector('span').textContent;
+      const span = this.querySelector('span');
+      span.textContent = 'I MISS YOU A LOTTTT 🥺😘';
+      
+      // Show glass break modal after a short delay
+      setTimeout(() => {
+        showGlassBreakModal(e);
+      }, 300);
+      
+      setTimeout(() => {
+        span.textContent = originalText;
+      }, 2000);
+    });
+
+    /* ---------- Glass Break Modal Functions ---------- */
+    function showGlassBreakModal(clickEvent) {
+      const modal = document.getElementById('glass-break-modal');
+      const glassWindow = document.getElementById('glass-window');
+      const glassHearts = document.getElementById('glass-hearts');
+      const impactPoint = document.getElementById('impact-point');
+      
+      // Show modal
+      modal.classList.add('show');
+      
+      // Simulate glass hit with heart effect
+      setTimeout(() => {
+        // Create impact point at center
+        const centerX = 50; // Center horizontally
+        const centerY = 50; // Center vertically
+        
+        impactPoint.style.left = centerX + '%';
+        impactPoint.style.top = centerY + '%';
+        impactPoint.classList.add('animate');
+        
+        // Show hearts emanating from impact point
+        setTimeout(() => {
+          glassHearts.classList.add('show');
+          
+        }, 200);
+        
+        // Trigger more confetti burst
+        const modalRect = glassWindow.getBoundingClientRect();
+        spawnBurst(modalRect.left + modalRect.width/2, modalRect.top + modalRect.height/2, 80);
+        
+      }, 100);
+      
+      // Reset impact point animation
+      setTimeout(() => {
+        impactPoint.classList.remove('animate');
+      }, 600);
+    }
+
+    function hideGlassBreakModal() {
+      const modal = document.getElementById('glass-break-modal');
+      const glassWindow = document.getElementById('glass-window');
+      const glassHearts = document.getElementById('glass-hearts');
+      
+      // Add shatter animation
+      glassWindow.classList.add('shatter');
+      
+      // Hide modal after shatter animation
+      setTimeout(() => {
+        modal.classList.remove('show');
+        glassWindow.classList.remove('shatter');
+        glassHearts.classList.remove('show');
+      }, 800);
+    }
+
+    // Close modal event listeners
+    document.getElementById('close-modal').addEventListener('click', hideGlassBreakModal);
+    
+    document.getElementById('glass-break-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        hideGlassBreakModal();
+      }
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('glass-break-modal');
+        if (modal.classList.contains('show')) {
+          hideGlassBreakModal();
+        }
+      }
+    });
+
+    // /* ---------- Enhanced name editing with micro-interaction ---------- */
+    // document.getElementById('greeting').addEventListener('click', async ()=>{
+    //   const name = prompt('Enter name for the greeting','Friend');
+    //   if(name!==null) {
+    //     document.getElementById('greeting').textContent = `🎉 Happy Birthday, ${name}!`;
+        
+    //     // Add a small celebration burst on name change
+    //     const rect = document.getElementById('greeting').getBoundingClientRect();
+    //     spawnBurst(rect.left + rect.width/2, rect.top + rect.height/2, 50);
+    //   }
+    // });
+
+  </script>
+</body>
+</html>
