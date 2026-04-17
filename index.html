@@ -689,9 +689,9 @@ button:focus,
   <!-- Login Page -->
   <div id="login-container" class="login-container">
     <div class="login-card">
-      <div class="cute-icon">🎂❤️</div>
-      <h2 class="login-title">HAPPY BIRTHDAY LEENIE !!!</h2>
-      <p class="login-subtitle">Enter to celebrate! (One day in real WE'LL) 🤗</p>
+      <div class="cute-icon">🎉❤️</div>
+      <h2 class="login-title">ENTER TO CELEBRATE !!!</h2>
+      <p class="login-subtitle"> One day in real WE'LL 🤗</p>
       
       <form class="login-form" id="login-form">
         <div class="input-group">
@@ -824,20 +824,8 @@ button:focus,
 
     // Check credentials
     if (username === "Leenie'sAmmu" && password === 'inf-6') {
-      // Hide login page
-      document.getElementById('login-container').classList.add('hidden');
-
-      // Show main content after animation
-        setTimeout(() => {
-          document.getElementById('main-container').classList.add('show');
-          
-          // Start confetti after main content is visible
-          setTimeout(() => {
-            const rect = document.getElementById('cake').getBoundingClientRect();
-            spawnBurst(rect.left + rect.width/2, rect.top + 40, 140);
-          }, 300);
-        }, 500);
-      } else {
+      window.location.href = "home.html";
+    } else {
         // Show error (shake animation)
         const loginCard = document.querySelector('.login-card');
         loginCard.style.animation = 'shake 0.5s ease-in-out';

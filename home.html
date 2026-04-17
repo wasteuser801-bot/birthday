@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Option</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #90c6f0, #e1effe);
+      font-family: Arial;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #4fa3f7;
+      color: white;
+    }
+
+    button:hover {
+      background: #298cf6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>MEMORIES DOWN THE LANE💖</h1>
+    <button onclick="goToPage('bday')">22nd bday 🎂</button>
+    <button onclick="goToPage('years')">7 years ❤️</button>
+  </div>
+
+  <script>
+    function goToPage(type) {
+        if (type === 'bday') {
+            window.location.href = "bday.html";   // ✅ THIS LINE
+        } else if(type == 'years') {
+            window.location.href = "sevenyrs.html";   // ✅ THIS LINE
+        }else {
+            alert("Open 7 Years Page ❤️");
+        }
+        }
+  </script>
+
+</body>
+</html>
